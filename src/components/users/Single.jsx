@@ -1,10 +1,12 @@
-import React, { Fragment, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { Fragment, useEffect, useContext } from "react";
 import Spinner from "../layouts/Spinner";
 import { Link } from "react-router-dom";
 import Repo from "../repo/Repo";
+import GithubContext from "../../context/github/githubContext";
 
-const Single = ({ user, loading, repos, getUser, getUserRepos, match }) => {
+const Single = ({ match }) => {
+  const context = useContext(GithubContext);
+  const { getUser, loading, user, getUserRepos, repos } = context;
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
@@ -101,14 +103,6 @@ const Single = ({ user, loading, repos, getUser, getUserRepos, match }) => {
       </Fragment>
     );
   }
-};
-
-Single.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
-  getUser: PropTypes.func.isRequired,
-  getUserRepos: PropTypes.func.isRequired,
-  repos: PropTypes.array.isRequired
 };
 
 export default Single;
