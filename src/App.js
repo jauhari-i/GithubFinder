@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  HashRouter
+} from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import Single from "./components/users/Single";
 import { Alert } from "./components/layouts/Alert";
@@ -15,22 +20,24 @@ const App = () => {
   return (
     <GithubState>
       <AlertState>
-        <Router>
-          <Navbar title="Github Finder" icon="fab fa-github" />
-          <div className="container">
-            <Alert />
-            <Switch>
-              <Route exact path="/GithubFinder" component={Home} />
-              <Route exact path="/GithubFinder/about" component={About} />
-              <Route
-                exact
-                path="/GithubFinder/user/:login"
-                render={props => <Single {...props} />}
-              />
-              <Route exact component={notFound} />
-            </Switch>
-          </div>
-        </Router>
+        <HashRouter basename="/">
+          <Router>
+            <Navbar title="Github Finder" icon="fab fa-github" />
+            <div className="container">
+              <Alert />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/about" component={About} />
+                <Route
+                  exact
+                  path="/user/:login"
+                  render={props => <Single {...props} />}
+                />
+                <Route exact component={notFound} />
+              </Switch>
+            </div>
+          </Router>
+        </HashRouter>
       </AlertState>
     </GithubState>
   );
