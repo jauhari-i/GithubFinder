@@ -20,8 +20,8 @@ const App = () => {
   return (
     <GithubState>
       <AlertState>
-        <HashRouter basename={process.env.PUBLIC_URL}>
-          <Router>
+        <HashRouter>
+          <Router basename={process.env.PUBLIC_URL}>
             <Navbar title="Github Finder" icon="fab fa-github" />
             <div className="container">
               <Alert />
